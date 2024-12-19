@@ -68,8 +68,7 @@ export function FormSingIn() {
             onChange={handleChangePassword}
           />
           <a href="#">забыли пороль?</a>
-        </div>4
-
+        </div>
         <button type="submit">войти</button>
       </form>
     </div>

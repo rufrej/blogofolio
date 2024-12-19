@@ -12,6 +12,14 @@
     min-width: 100%;
     display: flex;
     max-width: 72px;
+    border-bottom: solid 1px #e7e7e7;
+  }
+
+  &__categories {
+    text-decoration: none;
+    color: #000;
+    font-size: 24px;
+    margin: auto;
   }
 
   &__userbar {

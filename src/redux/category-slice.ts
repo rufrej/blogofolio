@@ -6,26 +6,23 @@ import { categoriesEndPoint } from "../config/bookApi";
 import { apiKey } from "../config/bookApi";
 import { ICategory } from "../types/types";
 
-// interface ISearchState {
-//   list: ICategory | null;
-//   searchResultsCount: null | number,
-//   isLoaded: boolean;
-//   error: null | string;
-// }
+interface ICategoryState {
+  item: ICategory | null;
+  isLoaded: boolean;
+  error: null | string;
+}
 
-const initialState = {
-  list: [],
-  searchResultsCount: null,
-  pageCount: null,
+const initialState: ICategoryState = {
+  item: null,
   isLoaded: false,
   error: null,
 };
 
-export const fetchBestSellersBooks = createAsyncThunk(
-  "posts/fetchBestSellersBook",
-  async () => {
+export const fetchCategory = createAsyncThunk(
+  "posts/fetchCategory",
+  async (category: string | undefined) => {
     const response = await fetch(
-      `${baseURL}/lists/best-sellers/history.json?${apiKey}`
+      `${baseURL}/lists/current/${category}.json?${apiKey}`
     );
 
     const data = response.json();
@@ -33,7 +30,7 @@ export const fetchBestSellersBooks = createAsyncThunk(
   }
 );
 
-export const booksSlice = createSlice({
+export const categoriesSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
@@ -41,19 +38,19 @@ export const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // fetchPosts
-      .addCase(fetchBestSellersBooks.pending, (state) => {
+      .addCase(fetchCategory.pending, (state) => {
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchBestSellersBooks.fulfilled, (state, action) => {
+      .addCase(fetchCategory.fulfilled, (state, action) => {
         state.isLoaded = false;
-        state.list = action.payload.results;
+        state.item = action.payload.results;
       })
-      .addCase(fetchBestSellersBooks.rejected, (state, action) => {
+      .addCase(fetchCategory.rejected, (state, action) => {
         state.isLoaded = false;
         // state.error = action.error.message;
       });
   },
 });
 
-export const booksReduser = booksSlice.reducer;
+export const categoryReduser = categoriesSlice.reducer;
