@@ -1,17 +1,15 @@
 .search {
   display: flex;
   align-items: center;
-  width: max-content;
+  width: 100%;
   margin-left: 10%;
   &__form {
     width: 100%;
-
     margin-left: 10%;
-
     position: relative;
     display: flex;
 
-    input {
+    &__input__wrapper {
       width: 100%;
     }
 
@@ -20,7 +18,7 @@
       background: none;
       position: absolute;
       top: 15%;
-      right: 5%;
+      right: 3%;
     }
   }
 }

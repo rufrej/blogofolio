@@ -1,18 +1,20 @@
 .header {
   padding: 5px;
+  width: 100%;
+  // display: flex;
+
+  &__row {
+    width: 100%;
+    display: flex;
+    // max-width: 72px;
+    border-bottom: solid 1px #e7e7e7;
+  }
 
   &__logo {
     text-decoration: none;
     font-size: 48px;
     font-weight: 700;
     color: #000;
-  }
-
-  &__row {
-    min-width: 100%;
-    display: flex;
-    max-width: 72px;
-    border-bottom: solid 1px #e7e7e7;
   }
 
   &__categories {
@@ -22,18 +24,52 @@
     margin: auto;
   }
 
+  &__nav {
+    width: 30%;
+    display: flex;
+  }
+
+  &__cart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 40px;
+    color: #000;
+    text-align: center;
+    margin: 0 15px;
+
+    &__counter {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      right: 0;
+      background-color: red;
+      border-radius: 50%;
+    }
+  }
+
   &__userbar {
     display: flex;
     margin-left: auto;
     margin-right: 10%;
     align-items: center;
     position: relative;
+    margin: 0 15px;
 
     &__singin {
       display: flex;
       flex-direction: column;
       text-decoration: none;
       color: #000;
+      width: 40px;
+      margin: 0 15px;
     }
 
     &:hover {

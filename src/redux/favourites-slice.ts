@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { book } from "../utils/book";
 const initialState = {
-  list: book.getBacket() || [],
+  list: book.getFavirites() || [],
 };
 
 export const favouritesSlice = createSlice({
@@ -10,9 +10,9 @@ export const favouritesSlice = createSlice({
   reducers: {
     addToFavourites: (state: any, action) => {
       state.list.push(action.payload);
-      let backet = book.getBacket();
-      backet.push(action.payload);
-      book.setToBacket(backet);
+      let favirites = book.getFavirites();
+      favirites.push(action.payload);
+      book.setToFavirites(favirites);
     },
 
     removeFromTheFavourites: (state: any, action) => {
@@ -21,15 +21,15 @@ export const favouritesSlice = createSlice({
         (book: any) => book.primary_isbn13 === bookId
       );
       state.list.splice(bookIndex, 1);
-      let backet = book.getBacket();
-      let target = backet.indexOf(
-        backet.find((book: any) => book.primary_isbn13 == bookId)
+      let favirites = book.getFavirites();
+      let target = favirites.indexOf(
+        favirites.find((book: any) => book.primary_isbn13 == bookId)
       );
-      backet.splice(target, 1);
-      book.setToBacket(backet);
+      favirites.splice(target, 1);
+      book.setToFavirites(favirites);
     },
   },
 });
 export const { addToFavourites, removeFromTheFavourites } =
   favouritesSlice.actions;
-export const backetReduser = favouritesSlice.reducer;
+export const favouritesReduser = favouritesSlice.reducer;

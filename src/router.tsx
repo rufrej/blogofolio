@@ -5,11 +5,11 @@ import { Authentication } from "./pages/Authentication";
 
 import { Home } from "./pages/Home";
 import { Layout } from "./components/Layout";
-import { Categories } from "./pages/Categories";
-import { Category } from "./pages/Category";
+
 import { SearchResults } from "./components/SearchResults";
 import { Book } from "./pages/Book";
-import { Backet } from "./pages/Backet";
+import { Cart } from "./pages/Cart";
+import { Favourites } from "./pages/Favourites";
 
 export const router = createBrowserRouter([
   {
@@ -21,24 +21,32 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/backet",
-        element: <Backet />,
+        path: "/cart",
+        element: <Cart />,
       },
       {
-        path: "/categories",
-        element: <Categories />,
+        path: "/favourites",
+        element: <Favourites />,
       },
       {
-        path: "/categories/:category",
-        element: <Category />,
-      },
-      {
-        path: "/categories/:category/:id",
+        path: "/books/:isbn",
         element: <Book />,
       },
+      // {
+      //   path: "/categories",
+      //   element: <Categories />,
+      // },
+      // {
+      //   path: "/categories/:category",
+      //   element: <Category />,
+      // },
+      // {
+      //   path: "/categories/:category/:id",
+      //   element: <Book />,
+      // },
 
       {
-        path: "/search/:query",
+        path: "/search/:query/:currentPage",
         element: <SearchResults />,
       },
 

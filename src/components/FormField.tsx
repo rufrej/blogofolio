@@ -11,7 +11,7 @@ export const FormField = forwardRef<FormFieldElement, IFormFieldProps>(
     function renderFormField() {
       return (
         <input
-          className="form-control"
+          className="form-control w-100"
           type={props.type}
           value={props.value}
           ref={ref as React.ForwardedRef<HTMLInputElement>}

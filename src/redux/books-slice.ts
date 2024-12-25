@@ -21,14 +21,13 @@ const initialState = {
   error: null,
 };
 
-export const fetchBestSellersBooks = createAsyncThunk(
-  "posts/fetchBestSellersBook",
+export const fetchNewBooks = createAsyncThunk(
+  "books/fetchNewBooks",
   async () => {
-    const response = await fetch(
-      `${baseURL}/lists/best-sellers/history.json?${apiKey}`
-    );
+    const response = await fetch("https://api.itbook.store/1.0/new");
 
     const data = response.json();
+
     return data;
   }
 );
@@ -41,15 +40,15 @@ export const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // fetchPosts
-      .addCase(fetchBestSellersBooks.pending, (state) => {
+      .addCase(fetchNewBooks.pending, (state) => {
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchBestSellersBooks.fulfilled, (state, action) => {
+      .addCase(fetchNewBooks.fulfilled, (state, action) => {
         state.isLoaded = false;
-        state.list = action.payload.results;
+        state.list = action.payload.books;
       })
-      .addCase(fetchBestSellersBooks.rejected, (state, action) => {
+      .addCase(fetchNewBooks.rejected, (state, action) => {
         state.isLoaded = false;
         // state.error = action.error.message;
       });

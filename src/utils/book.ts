@@ -1,35 +1,38 @@
+import axios from "axios";
+import { baseURL } from "../config/bookApi";
+
+const client = axios.create({
+  baseURL,
+  timeout: 1000,
+  // withCredentials: false,
+});
+
 export const book = {
   _bookKey: "book",
 
-  //   setToBacket(item: any) {
-  //     if (!backet) {
-  //         localStorage.setItem('backet', this.backetList )
-  //     }
-  //     const backet = localStorage.getItem("backet");
-
-  //     // const backet = [];
-  //     backet.push(item);
-  //     const json = JSON.stringify(backet);
-  //     localStorage.setItem("backet", json);
-  //   },
-
-  setToBacket(data: any) {
-    localStorage.setItem("backet", JSON.stringify(data));
+  setToCart(data: any) {
+    localStorage.setItem("cart", JSON.stringify(data));
   },
 
-  getBacket() {
-    const items = localStorage.getItem("backet");
+  getCart() {
+    const items = localStorage.getItem("cart");
     return items ? JSON.parse(items) : [];
   },
 
-  //   isAccessTokenExpired(accessToken: any) {
-  //     const decodedJwt = jwtDecode(accessToken);
-  //     const { exp }: any = decodedJwt;
-  //     const now = Date.now() / 1000;
-  //     return now >= exp;
-  //   },
+  setToFavirites(data: any) {
+    localStorage.setItem("favourites", JSON.stringify(data));
+  },
 
-  // clearBacket() {
-  //   localStorage.removeItem(this._bookKey);
-  // },
+  getFavirites() {
+    const items = localStorage.getItem("favourites");
+    return items ? JSON.parse(items) : [];
+  },
 };
+
+const get = client.get;
+const post = client.post;
+const put = client.put;
+const patch = client.patch;
+const del = client.delete;
+
+export { get, post, put, patch, del };

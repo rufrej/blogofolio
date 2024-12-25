@@ -1,9 +1,9 @@
 import { BuyList } from "../components/BuyList";
 
-export function Backet() {
+export function Cart() {
   return (
     <>
-      <h1>backet</h1>
+      <h1>Cart</h1>
       <BuyList />
     </>
   );

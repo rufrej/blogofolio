@@ -1,40 +1,46 @@
+import { useState } from "react";
 import { book } from "../utils/book";
 import { IBook } from "../types/types";
-import { BookCardBacket } from "./BookCardBacked";
-import { makePriceOutOfTheIsbn } from "../utils/price";
+import { BookCardCart } from "./BookCardCart";
+import { calcTotalPrice } from "../redux/cart-slice";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
-
+import { useEffect } from "react";
+import { getTotalPrice } from "../utils/totalPrice";
 export function BuyList() {
-  const backet = book.getBacket();
-  console.warn(backet.length);
-  const { list } = useAppSelector((state) => state.backet);
+  const dispatch = useAppDispatch();
 
-  function getTotalPrice() {
-    if (backet.length == 0) return <div>no books in backet</div>;
+  const cart = book.getCart();
+  const { list, totalPrice } = useAppSelector((state) => state.cart);
 
-    let sum = backet.map((book: IBook) => {
-      return makePriceOutOfTheIsbn(book.primary_isbn13) || [];
-    });
-    console.log(sum);
-    let result = sum.reduce((acc: number, val: number) => {
-      return acc + val;
-    });
+  // function getTotalPrice() {
+  //   if (cart.length == 0) return null;
 
-    return <h2>Total Price : {result}</h2>;
-  }
+  //   let prices = cart.map((book: IBook) => {
+  //     return book.count * Number(book.price.replace("$", ""));
+  //   });
+  //   let result = prices.reduce((acc: number, val: number) => {
+  //     return acc + val;
+  //   });
+  //   return result;
+  // }
+
+  useEffect(() => {
+    dispatch(calcTotalPrice(getTotalPrice()));
+  }, [calcTotalPrice, getTotalPrice]);
 
   console.log(list);
   function renderBooks() {
-    return backet?.map((book: IBook) => {
+    return cart?.map((book: IBook) => {
       return (
-        <BookCardBacket
-          key={book.primary_isbn13}
-          book_image={book.book_image}
+        <BookCardCart
+          key={book.isbn13}
+          image={book.image}
           title={book.title}
-          author={book.author}
-          link={book.category}
-          index={book.rank - 1}
-          isbn={book.primary_isbn13}
+          author={book.authors}
+          price={book.price}
+          isbn={book.isbn13}
+          count={book.count}
+
           // onClick={handleClickButtonRemove}
         />
       );
@@ -43,7 +49,8 @@ export function BuyList() {
 
   return (
     <>
-      {getTotalPrice()}
+      <h2>Total price: ${totalPrice}</h2>
+
       <div>{renderBooks()}</div>
     </>
   );

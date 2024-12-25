@@ -33,7 +33,6 @@ export function UserProfilenavigation() {
         onMouseLeave={() => setIsShown(false)}
       >
         <img src={userIcon} alt="Porfile" />
-        Profile
       </NavLink>
       {isShown && (
         <div

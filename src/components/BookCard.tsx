@@ -1,34 +1,24 @@
 import styles from "../styles/book-card.module.scss";
 import { NavLink } from "react-router-dom";
-import { makePriceOutOfTheIsbn } from "../utils/price";
 
 interface IBookCardProps {
-  book_image?: string;
+  image: string;
   title: string;
-  author: string;
-  link?: string;
-  index: number;
   isbn: string;
+  price: string;
 }
 
 export function BookCard(props: IBookCardProps) {
   return (
-    <NavLink
-      to={`/categories/${props.link}/${props.index}`}
-      className={styles.book__card}
-    >
+    <NavLink to={`/books/${props.isbn}`} className={styles.book__card}>
       <img
         className={styles.book__card__image}
-        src={props.book_image}
+        src={props.image}
         alt="preview"
       />
       <h4 className={styles.book__card__title}>{props.title}</h4>
-      <div>
-        <p className={styles.book__card__author}>
-          by <strong>{props.author}</strong>
-        </p>
-        <span>{makePriceOutOfTheIsbn(props.isbn)} $</span>
-      </div>
+      <div></div>
+      <span className={styles.book__card__price}>{props.price} $</span>
     </NavLink>
   );
 }

@@ -22,14 +22,15 @@ export function SearchForm() {
     event.preventDefault();
     const encodedQuery = encodeURIComponent(query);
     if (encodedQuery !== "") {
-      navigate(`/search/${encodedQuery}`);
+      navigate(`/search/${encodedQuery}/1`);
+      setQeury("");
     }
   };
 
   return (
     <div className={styles.search}>
       <form className={styles.search__form} onSubmit={handleSubmit}>
-        <div>
+        <div className={styles.search__form__input__wrapper}>
           <FormField
             name="search"
             type="text"

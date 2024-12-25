@@ -1,0 +1,21 @@
+.accordion {
+  &__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition-duration: 0.3s;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__content__body {
+    overflow: hidden;
+    margin-top: 10px;
+  }
+
+  &__details[open] + &__content {
+    grid-template-rows: 1fr;
+  }
+}
