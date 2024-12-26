@@ -1,0 +1,29 @@
+.homepage {
+  &__alert {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid rgba(210, 25, 25, 0.5);
+
+    padding: 8px 20px;
+
+    &__symbol {
+      background-color: rgba(210, 25, 25, 0.5);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin: 10px;
+    }
+
+    &__link {
+      margin-left: auto;
+      background-color: #000;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 20px;
+    }
+  }
+}

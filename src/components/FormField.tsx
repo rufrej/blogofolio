@@ -5,7 +5,11 @@ export const FormField = forwardRef<FormFieldElement, IFormFieldProps>(
   (props, ref) => {
     function renderLabel() {
       if (!props.label) return null;
-      return <label htmlFor={props.name}>{props.label}</label>;
+      return (
+        <label htmlFor={props.name} className="form-label">
+          {props.label}
+        </label>
+      );
     }
 
     function renderFormField() {

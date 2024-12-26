@@ -1,10 +1,11 @@
 import { Outlet, NavLink } from "react-router-dom";
+import styles from "../styles/authentication.module.scss";
 
 export function Authentication() {
   return (
     <div>
-      <div>
-        <ul className="nav nav-underline mb-5">
+      <div className="d-flex justify-content-center">
+        <ul className="nav nav-underline mb-5 fs-1">
           <NavLink
             className="nav-item nav-link text-dark px-3"
             aria-current="page"

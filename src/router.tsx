@@ -10,6 +10,7 @@ import { SearchResults } from "./components/SearchResults";
 import { Book } from "./pages/Book";
 import { Cart } from "./pages/Cart";
 import { Favourites } from "./pages/Favourites";
+import { Profile } from "./pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/cart",

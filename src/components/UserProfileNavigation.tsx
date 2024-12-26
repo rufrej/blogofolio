@@ -1,46 +1,63 @@
 import React, { useState } from "react";
 import styles from "../styles/header.module.scss";
-import logo from "../assets/header-icons/logo/brandFirstJanuary.svg";
 import userIcon from "../assets/header-icons/userIcon.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
 import { logOut } from "../redux/auth-slice";
+import { Button } from "./Button.tsx";
 
-export function UserProfilenavigation() {
+export function UserProfileNavigation() {
+  const navigate = useNavigate();
+
   const [isShown, setIsShown] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.jwt);
 
-  if (!token) {
+  function renderAuthButton() {
+    if (!token) {
+      return (
+        <Button color="dark" onClick={() => navigate("auth/signin")}>
+          Sing In
+        </Button>
+
+        // <NavLink className={styles.header__userbar__singin} to="auth/signin">
+        //   <img src={userIcon} alt="sing in" />
+        //   Войти
+        // </NavLink>
+      );
+    }
+
     return (
-      <NavLink className={styles.header__userbar__singin} to="auth/signin">
-        <img src={userIcon} alt="sing in" />
-        Войти
-      </NavLink>
+      <Button color="dark" onClick={handleClickButtonLogOut}>
+        Log Out
+      </Button>
     );
   }
 
   const handleClickButtonLogOut = () => {
     dispatch(logOut());
+    navigate("/");
   };
 
   return (
     <div>
-      <NavLink
+      <div
         className={styles.header__userbar__singin}
-        to="auth/signin"
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
       >
         <img src={userIcon} alt="Porfile" />
-      </NavLink>
+      </div>
       {isShown && (
         <div
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}
           className={styles.header__userbar__menu}
         >
-          <button onClick={handleClickButtonLogOut}>выйти</button>
+          <Button color="dark" onClick={() => navigate("/profile")}>
+            Profile
+          </Button>
+          {renderAuthButton()}
         </div>
       )}
     </div>

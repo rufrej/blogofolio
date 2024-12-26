@@ -1,31 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/useStore.ts';
-import {useNavigate} from 'react-router-dom';
-import {FormField} from './FormField.tsx';
-import { FormFieldElement } from '../types/types.ts';
-import styles from '../styles/form.module.scss';
-import {fetchSignIn, fetchUserData} from '../redux/auth-slice.ts';
-
-import toast from 'react-hot-toast';
+import React, { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
+import { useNavigate } from "react-router-dom";
+import { FormField } from "./FormField.tsx";
+import { FormFieldElement } from "../types/types.ts";
+import styles from "../styles/form.module.scss";
+import { fetchSignIn, fetchUserData } from "../redux/auth-slice.ts";
+import toast from "react-hot-toast";
 
 export function FormSingIn() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const jwt = useAppSelector(state => state.auth.jwt);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const jwt = useAppSelector((state) => state.auth.jwt);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleChangeEmail =({ target }: React.ChangeEvent<FormFieldElement>) => {
-    console.log('email: ' + target.value);
+  const handleChangeEmail = ({
+    target,
+  }: React.ChangeEvent<FormFieldElement>) => {
+    console.log("email: " + target.value);
     setEmail(target.value);
   };
 
-  const handleChangePassword = ({ target }: React.ChangeEvent<FormFieldElement>) => {
-    console.log('password: ' + target.value);
+  const handleChangePassword = ({
+    target,
+  }: React.ChangeEvent<FormFieldElement>) => {
+    console.log("password: " + target.value);
     setPassword(target.value);
   };
 
-  const handleSubmit =(event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     const body = {
@@ -33,14 +36,14 @@ export function FormSingIn() {
       password,
     };
     dispatch(fetchSignIn(body));
-    toast.success('You have successfully logged in');
+    toast.success("You have successfully logged in");
   };
 
   useEffect(() => {
     if (jwt) {
-      toast.success('You have successfully logged in');
-      // navigate('/');
-      dispatch(fetchUserData());
+      toast.success("You have successfully logged in");
+      navigate("/");
+      dispatch(fetchUserData(jwt.access));
     }
   }, [jwt, dispatch]);
 
@@ -62,14 +65,14 @@ export function FormSingIn() {
           <FormField
             name="password"
             label="password"
-             type="password"
+            type="password"
             value={password}
-            placeholder='password'
+            placeholder="password"
             onChange={handleChangePassword}
           />
-          <a href="#">забыли пороль?</a>
+          <a href="#">forgot your password? </a>
         </div>
-        <button type="submit">войти</button>
+        <button type="submit">SING IN</button>
       </form>
     </div>
   );

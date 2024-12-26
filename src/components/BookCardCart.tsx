@@ -7,31 +7,18 @@ import { book } from "../utils/book";
 import { Button } from "./Button";
 import styles from "../styles/book-card.module.scss";
 import buttonStyles from "../styles/button.module.scss";
-import { IBook } from "../types/types";
+import { IBook, IBookCardCartProps } from "../types/types";
 import removeSVG from "../assets/remove.svg";
 
-interface IBookCardProps {
-  image: string;
-  title: string;
-  author: string;
-  isbn: string;
-  price: string;
-  count: number;
-}
-
-export function BookCardCart(props: IBookCardProps) {
+export function BookCardCart(props: IBookCardCartProps) {
   const dispatch = useAppDispatch();
 
   const [count, setCount] = useState(props.count);
-
-  // const { list } = useAppSelector((store) => store.cart);
-  // console.log(list);
 
   function handleClickButtonRemove() {
     dispatch(removeFromTheCart(props.isbn));
   }
 
-  console.warn(book.getCart());
   function handleClickIncrement() {
     let cart = book.getCart();
     const item = cart.findIndex((book: IBook) => book.isbn13 == props.isbn);
@@ -43,10 +30,12 @@ export function BookCardCart(props: IBookCardProps) {
   function handleClickDecrement() {
     let cart = book.getCart();
     const item = cart.findIndex((book: IBook) => book.isbn13 == props.isbn);
-    cart[item].count = cart[item].count - 1;
-    setCount(count - 1);
-    book.setToCart(cart);
-    dispatch(calcTotalPrice(getTotalPrice()));
+    if (count > 1) {
+      cart[item].count = cart[item].count - 1;
+      setCount(count - 1);
+      book.setToCart(cart);
+      dispatch(calcTotalPrice(getTotalPrice()));
+    }
   }
 
   return (

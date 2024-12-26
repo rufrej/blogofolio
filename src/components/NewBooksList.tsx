@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 import { fetchNewBooks } from "../redux/books-slice";
-import { ICategory, IBookCard } from "../types/types";
-import { NavLink } from "react-router-dom";
+import { IBookCard } from "../types/types";
 import styles from "../styles/books.boards.module.scss";
 import { BookCard } from "../components/BookCard";
 
 export function NewBooksList() {
   const dispatch = useAppDispatch();
   const { list } = useAppSelector((state) => state.books);
-
-  console.log(list);
 
   useEffect(() => {
     dispatch(fetchNewBooks());
@@ -26,7 +23,6 @@ export function NewBooksList() {
           title={book.title}
           price={book.price}
           isbn={book.isbn13}
-          // onClick={handleClickButtonRemove}
         />
       );
     });

@@ -1,6 +1,7 @@
 import { IBook } from "../types/types";
 import { BookCardFavourites } from "./BookCardFavourites";
 import { useAppSelector } from "../hooks/useStore";
+import styles from "../styles/books.boards.module.scss";
 
 export function FavouritesList() {
   const { list } = useAppSelector((state) => state.favourites);
@@ -23,7 +24,7 @@ export function FavouritesList() {
 
   return (
     <>
-      <div>{renderBooks()}</div>
+      <div className={styles.board}>{renderBooks()}</div>
     </>
   );
 }

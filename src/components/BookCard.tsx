@@ -1,12 +1,6 @@
 import styles from "../styles/book-card.module.scss";
 import { NavLink } from "react-router-dom";
-
-interface IBookCardProps {
-  image: string;
-  title: string;
-  isbn: string;
-  price: string;
-}
+import { IBookCardProps } from "../types/types";
 
 export function BookCard(props: IBookCardProps) {
   return (

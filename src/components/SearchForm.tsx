@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
+import React, { useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { FormField } from "./FormField.tsx";
 import { FormFieldElement } from "../types/types.ts";
 import styles from "../styles/search.module.scss";
 import loupe from "../assets/header-icons/search.svg";
-import toast from "react-hot-toast";
 
 export function SearchForm() {
   const { query: queryParam } = useParams();
   const navigate = useNavigate();
   const [query, setQeury] = useState<any>(queryParam);
-  const formElement = useRef(null);
 
   const handleChange = ({ target }: React.ChangeEvent<FormFieldElement>) => {
     console.log("search: " + target.value);

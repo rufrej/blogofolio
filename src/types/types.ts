@@ -4,6 +4,18 @@ export type childrenPropsType = {
   children?: React.ReactNode;
 };
 
+export interface IBookCardProps {
+  image: string;
+  title: string;
+  isbn: string;
+  price: string;
+  author?: string;
+}
+
+export interface IBookCardCartProps extends IBookCardProps {
+  count: number;
+}
+
 export interface ICategoryCardProps {
   link: string;
   key: string;
@@ -123,7 +135,7 @@ export interface ISignIn {
   email: string;
   password: string;
 }
-
+export type FormFieldElement = HTMLInputElement;
 export interface IFormFieldProps {
   type: string;
   className?: string;
@@ -136,4 +148,7 @@ export interface IFormFieldProps {
   onChange: (event: React.ChangeEvent<FormFieldElement>) => void;
 }
 
-export type FormFieldElement = HTMLInputElement;
+export interface ISimilarBooksProps {
+  subtitle: string;
+  isbn: string;
+}

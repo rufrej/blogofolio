@@ -14,13 +14,19 @@ import {
 
 import { jwt } from "../utils/jwt";
 
+type currentUser = {
+  username: string;
+  id: number;
+  email: string;
+};
+
 interface IauthState {
   userEmail: string | null;
   isLoaded: boolean;
   error: string | undefined | null;
   isRegister: boolean;
   isActivated: boolean;
-  currentUser: string | null;
+  currentUser: currentUser | null;
   jwt: any;
 }
 

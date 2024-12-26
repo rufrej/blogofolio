@@ -47,8 +47,15 @@
 .similar__books__board {
   display: flex;
   flex-direction: row;
+  gap: 2%;
+  justify-content: space-between;
 
-  .book__card {
-    background-color: #000;
+  box-sizing: border-box;
+
+  a {
+    height: 100%;
   }
+}
+
+.favorites__books__board {
 }

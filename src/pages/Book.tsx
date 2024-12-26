@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 import { fetchBook } from "../redux/book-slice";
 import { findBookInList } from "../utils/findBook";
-import { addToCart, removeFromTheCart, isInList } from "../redux/cart-slice";
+import { addToCart, removeFromTheCart } from "../redux/cart-slice";
 import {
   addToFavourites,
   removeFromTheFavourites,
@@ -16,6 +16,7 @@ import heart from "../assets/header-icons/heart.svg";
 import { SimilarBooks } from "../components/SimilarBooks";
 import { IBook } from "../types/types";
 import { NavLink } from "react-router-dom";
+import { ButtonGoBack } from "../components/ButtonGoBack";
 
 export function Book() {
   const { isbn } = useParams();
@@ -27,7 +28,7 @@ export function Book() {
   console.log(book);
   useEffect(() => {
     dispatch(fetchBook(isbn));
-  }, [dispatch]);
+  }, [dispatch, isbn]);
 
   function handleClickButtonAddToCart() {
     if (book) {
@@ -192,18 +193,26 @@ export function Book() {
   }
 
   function findSubtitle(book: IBook) {
-    const result = book.subtitle.split(" ")[1];
-    console.log(result);
-    return result;
+    if (book.subtitle !== "") {
+      const result = book.subtitle.split(" ")[1];
+      console.log(result);
+      return result;
+    }
+    return book.authors;
   }
 
   return (
     <>
-      <div>{renderBookPage()}</div>
       <div>
-        <NavLink to={`/search/${findSubtitle(book)}/1`}>Similar Books</NavLink>
-        <SimilarBooks subtitle={findSubtitle(book)} />
+        <ButtonGoBack />
+        {renderBookPage()}
       </div>
+      <div>
+        <NavLink to={`/search/${findSubtitle(book)}/1`}>
+          <h2>Similar Books</h2>
+        </NavLink>
+      </div>
+      <SimilarBooks isbn={book.isbn13} subtitle={findSubtitle(book)} />
     </>
   );
 }

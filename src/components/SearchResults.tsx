@@ -3,7 +3,7 @@ import { useParams, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 import { fetchSearchBooks } from "../redux/search-slice";
 import { buildSchemePagination } from "../utils/schemePagination";
-import { IBookCard, ISearchBook } from "../types/types";
+import { IBookCard } from "../types/types";
 import { BookCard } from "./BookCard";
 import styles from "../styles/books.boards.module.scss";
 
@@ -12,14 +12,16 @@ export function SearchResults() {
   const { currentPage, query } = useParams();
   const { list, searchResultsCount } = useAppSelector((state) => state.search);
 
-  console.log(currentPage);
   function normalizeQuery(item: string | undefined) {
     if (!item) return undefined;
     return item.replace(" ", "+");
   }
 
   useEffect(() => {
-    dispatch(fetchSearchBooks(normalizeQuery(query)));
+    if (!query) return;
+    dispatch(
+      fetchSearchBooks({ query: normalizeQuery(query), page: currentPage })
+    );
   }, [dispatch, currentPage, query]);
 
   function renderBooks() {
@@ -31,79 +33,52 @@ export function SearchResults() {
           title={book.title}
           price={book.price}
           isbn={book.isbn13}
-          // onClick={handleClickButtonRemove}
         />
       );
     });
   }
-  // function renderPagination() {
-  //   if (!searchResultsCount) return null;
-  //   if (searchResultsCount <= 10) return null;
-  //   return (
-  //     <nav>
-  //       <ul className="pagination">{renderPaginationItems()}</ul>
-  //     </nav>
-  //   );
-  // }
+  function renderPagination() {
+    if (!searchResultsCount) return null;
+    if (searchResultsCount <= 10) return null;
+    return (
+      <nav>
+        <ul className="pagination">{renderPaginationItems()}</ul>
+      </nav>
+    );
+  }
 
-  // const renderPaginationItems = () => {
-  //   const pageCount = searchResultsCount / list.length;
-  //   const shceme = buildSchemePagination(currentPage, pageCount);
-  //   return shceme.map((item, index) => {
-  //     return (
-  //       <li className="page-item" key={index}>
-  //         {item == "..." ? (
-  //           <span className="page-link">...</span>
-  //         ) : (
-  //           <NavLink className="page-link" to={`/search/${query}/${index}`}>
-  //             {item}
-  //           </NavLink>
-  //         )}
-  //       </li>
-  //     );
-  //   });
-  // };
-  // function renderSearchResultsByAuthor() {
-  //     return (
-  //      listByAuthor?.map((book:ISearchBook) => {
+  const renderPaginationItems = () => {
+    if (!searchResultsCount || !currentPage) return null;
+    const pageCount = searchResultsCount / list.length;
 
-  //         return (<article key={book.summary}>
-  //            <h5>{book.book_title}</h5>
-  //          </article>)
-  //        })
-  //     )
-  //  }
-  // function renderSearchResultsByTitle() {
-  //     return (
-  //      list?.map((book:IBook) => {
+    const shceme = buildSchemePagination(currentPage, Math.round(pageCount));
 
-  //         return (<article key={book.summary}>
-  //            <h5>{book.book_title}</h5>
-  //          </article>)
-  //        })
-  //     )
-  //  }
-  // function renderSearchResultsByISBN() {
-  //     return (
-  //      listByISBN?.map((book:ISearchBook) => {
-
-  //         return (<article key={book.summary}>
-  //            <h5>{book.book_title}</h5>
-  //          </article>)
-  //        })
-  //     )
-  //  }
+    return shceme.map((item, index) => {
+      return (
+        <li className="page-item" key={index}>
+          {item == "..." ? (
+            <span className="page-link">...</span>
+          ) : (
+            <NavLink className="page-link" to={`/search/${query}/${item}`}>
+              {item}
+            </NavLink>
+          )}
+        </li>
+      );
+    });
+  };
 
   return (
     <>
       <div>
         <h1 className="mb-5">
-          Search results "{query}" Total : {searchResultsCount}
+          " {query} "
+          <br /> Total : {searchResultsCount}
         </h1>
         <div className={styles.board}>{renderBooks()}</div>
 
         <div className="d-flex justify-content-center">
-          {/* {renderPagination()} */}
+          {renderPagination()}
         </div>
       </div>
     </>

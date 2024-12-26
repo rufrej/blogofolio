@@ -93,7 +93,7 @@
   color: #000;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   align-items: center;
 
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -133,7 +133,7 @@
     margin: auto;
   }
 
-  &button__remove {
-    margin-left: auto;
+  &__button__remove {
+    align-self: flex-end;
   }
 }
