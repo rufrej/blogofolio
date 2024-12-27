@@ -1,41 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-import { baseURL } from "../config/bookApi";
-import { ICategory } from "../types/types";
-// import { requestBooksList } from "../servises/books";
 
-// interface ISearchState {
-//   list: ICategory | null;
-//   searchResultsCount: null | number,
-//   isLoaded: boolean;
-//   error: null | string;
-// }
+import { IBookCard } from "../types/types";
+
+interface IfetchSearchBooksAction {
+  books: IBookCard[];
+  error: string;
+  page: string;
+  total: string;
+}
 
 type parameters = {
   query: string | undefined;
   page: string | undefined;
 };
 
-const initialState = {
+interface ISearchState {
+  list: IBookCard[];
+  isLoaded: boolean;
+  error: null | string;
+  searchResultsCount: null | number;
+}
+
+const initialState: ISearchState = {
   list: [],
   isLoaded: false,
   error: null,
   searchResultsCount: null,
-
-  pageCount: null,
-  ordering: "date",
 };
 
-// export const fetchSearchBooks = createAsyncThunk(
-//   "books/fetchSearchBooks",
-//   async (query, currentPage) => {
-//     const response = await requestBooksList(query, currentPage);
-
-//     const data = response.json();
-//     return data;
-//   }
-// );
 export const fetchSearchBooks = createAsyncThunk(
   "books/fetchSearchBooks",
   async (params: parameters) => {
@@ -63,14 +56,17 @@ export const searchSlice = createSlice({
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchSearchBooks.fulfilled, (state, action) => {
+      .addCase(
+        fetchSearchBooks.fulfilled,
+        (state, action: PayloadAction<IfetchSearchBooksAction>) => {
+          state.isLoaded = false;
+          state.list = action.payload.books;
+          state.searchResultsCount = +action.payload.total;
+        }
+      )
+      .addCase(fetchSearchBooks.rejected, (state) => {
         state.isLoaded = false;
-        state.list = action.payload.books;
-        state.searchResultsCount = action.payload.total;
-      })
-      .addCase(fetchSearchBooks.rejected, (state, action) => {
-        state.isLoaded = false;
-        // state.error = action.error.message?;
+        state.error = "Search Error";
       });
   },
 });

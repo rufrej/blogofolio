@@ -1,5 +1,4 @@
 import { Outlet, NavLink } from "react-router-dom";
-import styles from "../styles/authentication.module.scss";
 
 export function Authentication() {
   return (

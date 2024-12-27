@@ -36,4 +36,10 @@
       margin-bottom: 10px;
     }
   }
+
+  &__similar__books__title {
+    &:hover {
+      color: rgba($color: #897f7fe9, $alpha: 1);
+    }
+  }
 }

@@ -5,7 +5,8 @@ import { UserProfileNavigation } from "./UserProfileNavigation.tsx";
 import cart from "../assets/header-icons/shopping-bag.svg";
 import heart from "../assets/header-icons/heart.svg";
 import styles from "../styles/header.module.scss";
-import { categoriesList } from "../config/constants.ts";
+
+import { BookMarks } from "./Bookmarks.tsx";
 
 export function Header() {
   const token = useAppSelector((state) => state.auth.jwt);
@@ -29,22 +30,9 @@ export function Header() {
         <NavLink className={styles.header__cart} to="/favourites">
           <img src={heart} alt="favourites" />
         </NavLink>
+        <BookMarks />
       </>
     );
-  }
-
-  function renderCategories() {
-    return categoriesList.map((item, index) => {
-      return (
-        <NavLink
-          key={index}
-          className={styles.header__category}
-          to={`/search/${item}/1`}
-        >
-          {item}
-        </NavLink>
-      );
-    });
   }
 
   return (
@@ -61,7 +49,6 @@ export function Header() {
           </div>
         </div>
       </div>
-      <div className={styles.header__categories}>{renderCategories()}</div>
     </header>
   );
 }

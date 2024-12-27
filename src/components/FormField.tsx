@@ -23,6 +23,7 @@ export const FormField = forwardRef<FormFieldElement, IFormFieldProps>(
           name={props.name}
           id={props.name}
           placeholder={props.placeholder}
+          list={props.list}
         />
       );
     }

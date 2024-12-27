@@ -17,20 +17,20 @@ export function UserProfileNavigation() {
     if (!token) {
       return (
         <Button color="dark" onClick={() => navigate("auth/signin")}>
-          Sing In
+          SingIn
         </Button>
-
-        // <NavLink className={styles.header__userbar__singin} to="auth/signin">
-        //   <img src={userIcon} alt="sing in" />
-        //   Войти
-        // </NavLink>
       );
     }
 
     return (
-      <Button color="dark" onClick={handleClickButtonLogOut}>
-        Log Out
-      </Button>
+      <>
+        <Button color="dark" onClick={() => navigate("/profile")}>
+          Profile
+        </Button>
+        <Button color="dark" onClick={handleClickButtonLogOut}>
+          Log Out
+        </Button>
+      </>
     );
   }
 
@@ -54,9 +54,6 @@ export function UserProfileNavigation() {
           onMouseLeave={() => setIsShown(false)}
           className={styles.header__userbar__menu}
         >
-          <Button color="dark" onClick={() => navigate("/profile")}>
-            Profile
-          </Button>
           {renderAuthButton()}
         </div>
       )}

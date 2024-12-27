@@ -1,9 +1,14 @@
 // import { searchEndPoint } from "../config/bookApi";
 // import { get, post } from "../utils/book";
 
-// export const requestBooksList = async (params:Record<string, any> = {}, page: number) => {
+// type parameters = {
+//     query: string | undefined;
+//     page: string | undefined;
+//   };
+
+// export const requestBooksList = async (params:parameters) => {
 //   try {
-//     const response = await get(searchEndPoint,  params, page);
+//     const response = await get(searchEndPoint, { params.query, params.page});
 //     console.warn(response);
 //     return response.data;
 //   } catch (error) {

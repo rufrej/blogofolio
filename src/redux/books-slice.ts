@@ -1,22 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-import { baseURL } from "../config/bookApi";
-import { categoriesEndPoint } from "../config/bookApi";
-import { apiKey } from "../config/bookApi";
-import { ICategory } from "../types/types";
+import { IBookCard } from "../types/types";
 
-// interface ISearchState {
-//   list: ICategory | null;
-//   searchResultsCount: null | number,
-//   isLoaded: boolean;
-//   error: null | string;
-// }
+interface IfetchBooksAction {
+  books: IBookCard[];
+  error: string;
+  page: string;
+  total: string;
+}
+interface IbooksState {
+  list: IBookCard[];
+  isLoaded: boolean;
+  error: null | string;
+}
 
-const initialState = {
+const initialState: IbooksState = {
   list: [],
-  searchResultsCount: null,
-  pageCount: null,
   isLoaded: false,
   error: null,
 };
@@ -44,13 +43,16 @@ export const booksSlice = createSlice({
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchNewBooks.fulfilled, (state, action) => {
+      .addCase(
+        fetchNewBooks.fulfilled,
+        (state, action: PayloadAction<IfetchBooksAction>) => {
+          state.isLoaded = false;
+          state.list = action.payload.books;
+        }
+      )
+      .addCase(fetchNewBooks.rejected, (state) => {
         state.isLoaded = false;
-        state.list = action.payload.books;
-      })
-      .addCase(fetchNewBooks.rejected, (state, action) => {
-        state.isLoaded = false;
-        // state.error = action.error.message;
+        state.error = "fetch New Books Error";
       });
   },
 });

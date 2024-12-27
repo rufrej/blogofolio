@@ -41,11 +41,10 @@ export function FormSingIn() {
 
   useEffect(() => {
     if (jwt) {
-      toast.success("You have successfully logged in");
       navigate("/");
-      dispatch(fetchUserData(jwt.access));
+      dispatch(fetchUserData(jwt));
     }
-  }, [jwt, dispatch]);
+  }, [jwt, dispatch, toast]);
 
   return (
     <div>
@@ -70,7 +69,7 @@ export function FormSingIn() {
             placeholder="password"
             onChange={handleChangePassword}
           />
-          <a href="#">forgot your password? </a>
+          <a href="#">forgot your password?</a>
         </div>
         <button type="submit">SING IN</button>
       </form>

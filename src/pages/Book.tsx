@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
+import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 import { fetchBook } from "../redux/book-slice";
 import { findBookInList } from "../utils/findBook";
 import { addToCart, removeFromTheCart } from "../redux/cart-slice";
@@ -9,14 +11,12 @@ import {
   removeFromTheFavourites,
 } from "../redux/favourites-slice";
 import { Button } from "../components/Button";
-import toast from "react-hot-toast";
-import styles from "../styles/book-page.module.scss";
 import { Accordion } from "../components/Accordion";
 import heart from "../assets/header-icons/heart.svg";
 import { SimilarBooks } from "../components/SimilarBooks";
-import { IBook } from "../types/types";
-import { NavLink } from "react-router-dom";
 import { ButtonGoBack } from "../components/ButtonGoBack";
+import { findSubtitle } from "../utils/findSubtitle";
+import styles from "../styles/book-page.module.scss";
 
 export function Book() {
   const { isbn } = useParams();
@@ -25,7 +25,17 @@ export function Book() {
   const { list } = useAppSelector((state) => state.cart);
   const favorites = useAppSelector((state) => state.favourites.list);
 
-  console.log(book);
+  function sectionAuthors() {
+    const arr = book?.authors.split(",");
+    return arr?.map((autor, index) => {
+      return (
+        <NavLink key={index} to={`/search/${autor}/1`}>
+          <strong>{autor}</strong>
+        </NavLink>
+      );
+    });
+  }
+
   useEffect(() => {
     dispatch(fetchBook(isbn));
   }, [dispatch, isbn]);
@@ -40,8 +50,9 @@ export function Book() {
   }
 
   function handleClickButtonRemoveToCart() {
-    dispatch(removeFromTheCart(book?.isbn13));
-    toast(`${book?.title} \n\n  removed  from  backet`, {
+    if (!book) return;
+    dispatch(removeFromTheCart(book.isbn13));
+    toast(`${book?.title} \n\n  removed  from  backet ❌`, {
       duration: 4000,
     });
   }
@@ -49,13 +60,14 @@ export function Book() {
   function handleClickButtonAddToFavourites() {
     if (book) {
       dispatch(addToFavourites(book));
-      toast.success("book added to favourites");
+      toast("book added to favourites ❤️");
     }
   }
 
   function handleClickButtonRemoveToFavourites() {
-    dispatch(removeFromTheFavourites(book?.isbn13));
-    toast(`${book?.title} \n\n  removed  from  favourites`, {
+    if (!book) return;
+    dispatch(removeFromTheFavourites(book.isbn13));
+    toast(`${book?.title} \n\n  removed  from  favourites 💔`, {
       duration: 4000,
     });
   }
@@ -97,6 +109,7 @@ export function Book() {
         );
     }
   }
+
   function renderButtonsFavourires() {
     switch (findBookInList(favorites, book)) {
       case true:
@@ -137,9 +150,7 @@ export function Book() {
               <h2>{book.price}</h2>
               <div className={styles.book__page__info__item}>
                 <p>Authors</p>
-                <NavLink to={`/search/${book.authors}/1`}>
-                  <strong>{book.authors}</strong>
-                </NavLink>
+                <div>{sectionAuthors()}</div>
               </div>
 
               <div className={styles.book__page__info__item}>
@@ -192,15 +203,6 @@ export function Book() {
     return <div>No Book</div>;
   }
 
-  function findSubtitle(book: IBook) {
-    if (book.subtitle !== "") {
-      const result = book.subtitle.split(" ")[1];
-      console.log(result);
-      return result;
-    }
-    return book.authors;
-  }
-
   return (
     <>
       <div>
@@ -209,7 +211,9 @@ export function Book() {
       </div>
       <div>
         <NavLink to={`/search/${findSubtitle(book)}/1`}>
-          <h2>Similar Books</h2>
+          <h2 className={styles.book__page__similar__books__title}>
+            Similar Books{" "}
+          </h2>
         </NavLink>
       </div>
       <SimilarBooks isbn={book.isbn13} subtitle={findSubtitle(book)} />

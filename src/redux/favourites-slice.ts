@@ -1,6 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { book } from "../utils/book";
-const initialState = {
+import { IBook } from "../types/types";
+
+interface IFavouritesState {
+  list: IBook[];
+}
+
+const initialState: IFavouritesState = {
   list: book.getFavirites() || [],
 };
 
@@ -8,25 +14,25 @@ export const favouritesSlice = createSlice({
   name: "favourites",
   initialState,
   reducers: {
-    addToFavourites: (state: any, action) => {
+    addToFavourites: (state, action: PayloadAction<IBook>) => {
       state.list.push(action.payload);
-      let favirites = book.getFavirites();
-      favirites.push(action.payload);
-      book.setToFavirites(favirites);
+      let favourites = book.getFavirites();
+      favourites.push(action.payload);
+      book.setToFavirites(favourites);
     },
 
-    removeFromTheFavourites: (state: any, action) => {
+    removeFromTheFavourites: (state, action: PayloadAction<string>) => {
       const bookId = action.payload;
       const bookIndex = state.list.findIndex(
-        (book: any) => book.primary_isbn13 === bookId
+        (book: IBook) => book.isbn13 === bookId
       );
       state.list.splice(bookIndex, 1);
-      let favirites = book.getFavirites();
-      let target = favirites.indexOf(
-        favirites.find((book: any) => book.primary_isbn13 == bookId)
+      let favourites = book.getFavirites();
+      let target = favourites.indexOf(
+        favourites.find((book: IBook) => book.isbn13 == bookId)
       );
-      favirites.splice(target, 1);
-      book.setToFavirites(favirites);
+      favourites.splice(target, 1);
+      book.setToFavirites(favourites);
     },
   },
 });

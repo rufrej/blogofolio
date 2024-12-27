@@ -1,6 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { book } from "../utils/book";
-const initialState = {
+import { IBook } from "../types/types";
+
+interface ICartState {
+  list: IBook[];
+  totalPrice: number;
+}
+
+const initialState: ICartState = {
   list: book.getCart() || [],
   totalPrice: 0,
 };
@@ -9,41 +16,31 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state: any, action) => {
+    addToCart: (state, action: PayloadAction<IBook>) => {
       state.list.push(action.payload);
       let cart = book.getCart();
       cart.push(action.payload);
       book.setToCart(cart);
     },
 
-    removeFromTheCart: (state: any, action) => {
+    removeFromTheCart: (state, action: PayloadAction<string>) => {
       const bookId = action.payload;
       const bookIndex = state.list.findIndex(
-        (book: any) => book.primary_isbn13 === bookId
+        (book: IBook) => book.isbn13 === bookId
       );
-      state.list.splice(bookIndex, 1);
+      state.list.splice(bookIndex);
       let cart = book.getCart();
-      let target = cart.indexOf(
-        cart.find((book: any) => book.primary_isbn13 == bookId)
-      );
+      let target = cart.findIndex((book: IBook) => book.isbn13 == bookId);
       cart.splice(target, 1);
+
       book.setToCart(cart);
     },
 
-    calcTotalPrice: (state, action) => {
-      console.log(action.payload);
+    calcTotalPrice: (state, action: PayloadAction<number>) => {
       state.totalPrice = action.payload;
-    },
-
-    isInList: (state: any, action) => {
-      const bookId = action.payload.primary_isbn13;
-      const bookIndex = state.list.find(
-        (book: any) => book.primary_isbn13 === bookId
-      );
-      console.log(state.list);
     },
   },
 });
-export const { addToCart, removeFromTheCart, isInList, calcTotalPrice } =
+export const { addToCart, removeFromTheCart, calcTotalPrice } =
   cartSlice.actions;
 export const cartReduser = cartSlice.reducer;

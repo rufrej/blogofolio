@@ -30,7 +30,6 @@ export function NewBooksList() {
 
   return (
     <>
-      <h3 className={styles.board__title}>NEW RELEASES BOOKS</h3>
       <div className={styles.board}>{renderBooks()}</div>
     </>
   );

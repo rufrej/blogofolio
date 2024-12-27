@@ -24,7 +24,7 @@ export function FavouritesList() {
 
   return (
     <>
-      <div className={styles.board}>{renderBooks()}</div>
+      <div className={styles.favorites__books__board}>{renderBooks()}</div>
     </>
   );
 }

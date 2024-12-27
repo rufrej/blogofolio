@@ -6,6 +6,9 @@ import { buildSchemePagination } from "../utils/schemePagination";
 import { IBookCard } from "../types/types";
 import { BookCard } from "./BookCard";
 import styles from "../styles/books.boards.module.scss";
+import { Button } from "./Button";
+import markCircle from "../assets/bookmark-circle-svgrepo-com.svg";
+import { categoriesList } from "../config/constants";
 
 export function SearchResults() {
   const dispatch = useAppDispatch();
@@ -15,6 +18,11 @@ export function SearchResults() {
   function normalizeQuery(item: string | undefined) {
     if (!item) return undefined;
     return item.replace(" ", "+");
+  }
+
+  function handleClickButtonAddToBookmarks() {
+    if (!query) return;
+    categoriesList.push(query);
   }
 
   useEffect(() => {
@@ -71,10 +79,14 @@ export function SearchResults() {
   return (
     <>
       <div>
-        <h1 className="mb-5">
-          " {query} "
-          <br /> Total : {searchResultsCount}
-        </h1>
+        <div className={styles.board__search__title}>
+          <h2>" {query} "</h2>{" "}
+          <Button color="transparent" onClick={handleClickButtonAddToBookmarks}>
+            <img src={markCircle} alt="add to bookmarks" />
+          </Button>
+          <h2>Total : {searchResultsCount}</h2>
+        </div>
+
         <div className={styles.board}>{renderBooks()}</div>
 
         <div className="d-flex justify-content-center">

@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-
-import { ISignIn, ISignUp, IJwt } from "../types/types";
+import { ISignIn, ISignUp, IJwt, IUserData } from "../types/types";
 
 import {
   requestSignUp,
@@ -27,7 +24,14 @@ interface IauthState {
   isRegister: boolean;
   isActivated: boolean;
   currentUser: currentUser | null;
-  jwt: any;
+  jwt: IJwt | null;
+}
+
+interface IfetchSignUpAction {
+  id: number;
+  username: string;
+  email: string;
+  course_group: number;
 }
 
 const initialState: IauthState = {
@@ -44,7 +48,6 @@ export const fetchSignUp = createAsyncThunk(
   "auth/fetchSignUp",
   async (body: ISignUp, { rejectWithValue }) => {
     const data = await requestSignUp(body);
-
     if (data.hasError) {
       return rejectWithValue(data);
     }
@@ -110,14 +113,17 @@ export const authSlice = createSlice({
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchSignUp.fulfilled, (state, action) => {
+      .addCase(
+        fetchSignUp.fulfilled,
+        (state, action: PayloadAction<IfetchSignUpAction>) => {
+          state.isLoaded = false;
+          state.userEmail = action.payload.email;
+          state.isRegister = true;
+        }
+      )
+      .addCase(fetchSignUp.rejected, (state) => {
         state.isLoaded = false;
-        state.userEmail = action.payload.email;
-        state.isRegister = true;
-      })
-      .addCase(fetchSignUp.rejected, (state, action) => {
-        state.isLoaded = false;
-        state.error = action.error.message;
+        state.error = "Sign Up Error";
       })
       //----- Activation ------
       .addCase(fetchAuthActivation.pending, (state) => {
@@ -129,40 +135,40 @@ export const authSlice = createSlice({
         state.isActivated = true;
         state.isLoaded = false;
       })
-      .addCase(
-        fetchAuthActivation.rejected,
-        (state, action: PayloadAction<any>) => {
-          state.isLoaded = false;
-          state.isActivated = false;
-          state.error = action.payload;
-        }
-      )
+      .addCase(fetchAuthActivation.rejected, (state) => {
+        state.isLoaded = false;
+        state.isActivated = false;
+        state.error = "Activation error";
+      })
       // ----- Sign In ------
       .addCase(fetchSignIn.pending, (state) => {
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchSignIn.fulfilled, (state, action) => {
+      .addCase(fetchSignIn.fulfilled, (state, action: PayloadAction<IJwt>) => {
         state.isLoaded = false;
         state.jwt = action.payload;
-        console.log(action.payload);
       })
-      .addCase(fetchSignIn.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchSignIn.rejected, (state) => {
         state.isLoaded = false;
-        state.error = action.payload.message;
+        state.error = "Sing in Error";
       })
       // ----- Fetch User Data ------
       .addCase(fetchUserData.pending, (state) => {
         state.isLoaded = true;
         state.error = null;
       })
-      .addCase(fetchUserData.fulfilled, (state, action) => {
+      .addCase(
+        fetchUserData.fulfilled,
+        (state, action: PayloadAction<IUserData>) => {
+          state.isLoaded = false;
+          console.warn(action.payload);
+          state.currentUser = action.payload;
+        }
+      )
+      .addCase(fetchUserData.rejected, (state) => {
         state.isLoaded = false;
-        state.currentUser = action.payload;
-      })
-      .addCase(fetchUserData.rejected, (state, action) => {
-        state.isLoaded = false;
-        state.error = action.error.message;
+        state.error = "Data Error";
       });
   },
 });

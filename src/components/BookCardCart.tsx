@@ -17,6 +17,7 @@ export function BookCardCart(props: IBookCardCartProps) {
 
   function handleClickButtonRemove() {
     dispatch(removeFromTheCart(props.isbn));
+    dispatch(calcTotalPrice(getTotalPrice()));
   }
 
   function handleClickIncrement() {
@@ -51,7 +52,7 @@ export function BookCardCart(props: IBookCardCartProps) {
         />
 
         <div className={styles.book__card__cart__info}>
-          <h4 className={styles.book__card__cart__title}>{props.title}</h4>
+          <h2 className={styles.book__card__cart__title}>{props.title}</h2>
           <div>
             <p className={styles.book__card__cart__author}>
               by <strong>{props.author}</strong>

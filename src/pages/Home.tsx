@@ -23,7 +23,7 @@ export function Home() {
   return (
     <div className={styles.homepage}>
       {renderAlert()}
-      <h1>HOME</h1>
+      <h1 className={styles.homepage__title}>new releases books</h1>
       <NewBooksList />
     </div>
   );

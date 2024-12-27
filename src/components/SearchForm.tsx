@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FormField } from "./FormField.tsx";
 import { FormFieldElement } from "../types/types.ts";
 import styles from "../styles/search.module.scss";
 import loupe from "../assets/header-icons/search.svg";
 
 export function SearchForm() {
-  const { query: queryParam } = useParams();
   const navigate = useNavigate();
-  const [query, setQeury] = useState<any>(queryParam);
+  const [query, setQeury] = useState<string>("");
 
   const handleChange = ({ target }: React.ChangeEvent<FormFieldElement>) => {
     console.log("search: " + target.value);
@@ -34,6 +32,7 @@ export function SearchForm() {
             type="text"
             value={query}
             placeholder="search..."
+            list="datalist"
             onChange={handleChange}
           />
         </div>

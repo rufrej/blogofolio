@@ -16,7 +16,11 @@ export function BuyList() {
     dispatch(calcTotalPrice(getTotalPrice()));
   }, [calcTotalPrice, getTotalPrice]);
 
-  console.log(list);
+  function rendertitle() {
+    if (list.length == 0) return <h2>no books in cart</h2>;
+    return <h2>Total price: ${totalPrice}</h2>;
+  }
+
   function renderBooks() {
     return cart?.map((book: IBook) => {
       return (
@@ -35,7 +39,7 @@ export function BuyList() {
 
   return (
     <>
-      <h2>Total price: ${totalPrice}</h2>
+      {rendertitle()}
       <div>{renderBooks()}</div>
     </>
   );
