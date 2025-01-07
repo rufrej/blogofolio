@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
 import { useNavigate } from "react-router-dom";
 import { FormField } from "./FormField.tsx";
 import { FormFieldElement } from "../types/types.ts";
-import styles from "../styles/form.module.scss";
 import { fetchSignIn, fetchUserData } from "../redux/auth-slice.ts";
 import toast from "react-hot-toast";
 
@@ -49,7 +48,7 @@ export function FormSingIn() {
   return (
     <div>
       <h1>SingIn</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className="form">
         <div className="mb-4">
           <FormField
             name="email"

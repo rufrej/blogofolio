@@ -12,7 +12,7 @@ interface IPostState {
   error: null | string | undefined;
   limit: 11;
   searchResultsCount: null;
-  pageCount: number | null;
+  count: number | null;
   ordering: "date";
 }
 const initialState: IPostState = {
@@ -21,7 +21,7 @@ const initialState: IPostState = {
   error: null,
   limit: 11,
   searchResultsCount: null,
-  pageCount: null,
+  count: null,
   ordering: "date",
 };
 
@@ -97,7 +97,7 @@ export const postsSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.isLoaded = false;
         state.list = action.payload.results;
-        state.pageCount = Math.ceil(action.payload.count / state.limit);
+        state.count = Math.ceil(action.payload.count / state.limit);
         state.searchResultsCount = action.payload.count;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
@@ -126,7 +126,7 @@ export const postsSlice = createSlice({
         state.isLoaded = false;
         state.error = null;
         state.list = action.payload.results;
-        state.pageCount = Math.ceil(action.payload.count / state.limit);
+        state.count = Math.ceil(action.payload.count / state.limit);
       })
       .addCase(fetchMyPosts.rejected, (state, action) => {
         state.isLoaded = false;

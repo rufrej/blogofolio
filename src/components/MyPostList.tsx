@@ -1,4 +1,3 @@
-import styles from "../styles/posts.module.scss";
 import { useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
@@ -21,8 +20,9 @@ export function MyPostsList(props: any) {
   const {
     list: posts,
     isLoaded,
+    limit,
     error,
-    pageCount,
+    count,
   } = useAppSelector((state) => state.posts);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export function MyPostsList(props: any) {
   }, [dispatch, currentPage, ordering]);
 
   const renderPagination = () => {
+    if (count == null || count <= limit) return null;
     return (
       <nav>
         <ul className="pagination">{renderPaginationItems()}</ul>
@@ -41,10 +42,10 @@ export function MyPostsList(props: any) {
 
   const renderPaginationItems = () => {
     if (!currentPage) return null;
-    if (pageCount == null) {
+    if (count == null) {
       return 1;
     }
-    const shceme = buildSchemePagination(currentPage, +pageCount);
+    const shceme = buildSchemePagination(currentPage, +count);
 
     return shceme.map((item, index) => {
       return (
@@ -103,39 +104,16 @@ export function MyPostsList(props: any) {
     return <div>No posts</div>;
   }
 
-  // function handleChangeSelectOrdering(event: any) {
-  //   dispatch(setOrdering(event.target.value));
-  //   navigate(`/posts/myposts/1/?ordering=${ordering}`);
-  // }
-
   return (
     <>
       <div>
-        {/* <div className="d-flex">
-          <label
-            className="fs-4 mx-3 fw-bold mt-1 text-nowrap"
-            htmlFor="select"
-          >
-            Sort by
-          </label>
-          <select
-            name="select"
-            className="form-select h-50 w-75 fs-5"
-            onChange={handleChangeSelectOrdering}
-          >
-            <option value="date">Date</option>
-            <option value="title">Title</option>
-            <option value="text">Text</option>
-            <option value="lesson_num">Lesson number</option>
-          </select>
-        </div> */}
         <Ordering page="myposts" />
-        <div className={styles.board}>
-          <div className={styles.firstColumn}>
+        <div className="board">
+          <div className="firstColumn">
             <div>{renderCardLarge()}</div>
-            <div className={styles.medium}>{renderCardMedium()}</div>
+            <div className="medium">{renderCardMedium()}</div>
           </div>
-          <div className={styles.small}>{renderCardSmall()}</div>
+          <div className="small">{renderCardSmall()}</div>
         </div>
         <div className="d-flex justify-content-center">
           {renderPagination()}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormField } from "./FormField.tsx";
 import { FormFieldElement } from "../types/types.ts";
-import styles from "../styles/search.module.scss";
 import loupe from "../assets/header-icons/search.svg";
 
 export function SearchForm() {
@@ -24,9 +23,9 @@ export function SearchForm() {
   };
 
   return (
-    <div className={styles.search}>
-      <form className={styles.search__form} onSubmit={handleSubmit}>
-        <div className={styles.search__form__input__wrapper}>
+    <div className="search">
+      <form className="search__form" onSubmit={handleSubmit}>
+        <div className="search__form__input__wrapper">
           <FormField
             name="search"
             type="text"
@@ -37,7 +36,7 @@ export function SearchForm() {
           />
         </div>
 
-        <button className={styles.search__form__button} type="submit">
+        <button className="search__form__button" type="submit">
           <img src={loupe} alt="" />
         </button>
       </form>

@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../hooks/useStore";
-import styles from "../styles/home.module.scss";
 
 export function Home() {
   const token = useAppSelector((state) => state.auth.jwt);
@@ -9,10 +8,10 @@ export function Home() {
     if (token) return null;
 
     return (
-      <div className={styles.homepage__alert}>
-        <span className={styles.homepage__alert__symbol}>!</span>
+      <div className="homepage__alert">
+        <span className="homepage__alert__symbol">!</span>
         <h3>You are not authorized, please log in or register</h3>
-        <NavLink className={styles.homepage__alert__link} to={"/auth/signin"}>
+        <NavLink className="homepage__alert__link" to={"/auth/signin"}>
           Sing In
         </NavLink>
       </div>
@@ -20,9 +19,9 @@ export function Home() {
   }
 
   return (
-    <div className={styles.homepage}>
+    <div className="homepage">
       {renderAlert()}
-      <h1 className={styles.homepage__title}>Home page</h1>
+      <h1 className="homepage__title">Home page</h1>
     </div>
   );
 }

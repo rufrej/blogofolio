@@ -5,17 +5,16 @@ import { UserProfileNavigation } from "./UserProfileNavigation.tsx";
 import cart from "../assets/header-icons/shopping-bag.svg";
 import heart from "../assets/header-icons/heart.svg";
 import { useTheme } from "../hooks/useTheme.ts";
-import { Button } from "./Button.tsx";
+import { Button } from "./UI/Button.tsx";
 
 export function Header() {
-  const { theme, setTheme } = useTheme();
-  const token = useAppSelector((state) => state.auth.jwt);
-  const purchaseСounter = useAppSelector((state) => state.cart.list.length);
+  // const token = useAppSelector((state) => state.auth.jwt);
+  // const purchaseСounter = useAppSelector((state) => state.cart.list.length);
 
-  function renderPurchaseСounter() {
-    if (purchaseСounter == 0) return null;
-    return <span className="header__cart__counter">{purchaseСounter}</span>;
-  }
+  // function renderPurchaseСounter() {
+  //   if (purchaseСounter == 0) return null;
+  //   return <span className="header__cart__counter">{purchaseСounter}</span>;
+  // }
 
   // function renderNavigation() {
   //   if (!token) return null;
@@ -31,13 +30,6 @@ export function Header() {
   //   );
   // }
 
-  const handleClickLightThemeButton = () => {
-    setTheme("light");
-  };
-  const handleClickDarkThemeButton = () => {
-    setTheme("dark");
-  };
-
   return (
     <header>
       <div className="header__row">
@@ -47,14 +39,7 @@ export function Header() {
         <SearchForm />
         <div className="header__nav">
           <div className="header__userbar">
-            <Button onClick={handleClickDarkThemeButton} color="dark">
-              dark theme
-            </Button>
-            <Button onClick={handleClickLightThemeButton} color="blue">
-              light theme
-            </Button>
             <UserProfileNavigation />
-            {/* {renderNavigation()} */}
           </div>
         </div>
       </div>

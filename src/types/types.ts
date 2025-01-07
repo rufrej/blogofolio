@@ -11,6 +11,10 @@ export interface IPost {
   title: string;
 }
 
+export type cardProps = {
+  item: IPost;
+};
+
 export type childrenPropsType = {
   children?: React.ReactNode;
 };

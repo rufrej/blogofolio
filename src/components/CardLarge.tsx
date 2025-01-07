@@ -1,7 +1,7 @@
-import styles from "../styles/cards.module.scss";
 import { Link } from "react-router-dom";
+import { cardProps } from "../types/types";
 
-export function CardLarge(props: any) {
+export function CardLarge(props: cardProps) {
   return (
     <div className="cardLarge">
       <div className="cardContent">

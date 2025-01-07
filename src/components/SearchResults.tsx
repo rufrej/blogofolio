@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 import { fetchSearchBooks } from "../redux/search-slice";
 import { buildSchemePagination } from "../utils/schemePagination";
 import styles from "../styles/books.boards.module.scss";
-import { Button } from "./Button";
+import { Button } from "./UI/Button";
 import markCircle from "../assets/bookmark-circle-svgrepo-com.svg";
 import { categoriesList } from "../config/constants";
 
@@ -78,7 +78,7 @@ export function SearchResults() {
   return (
     <>
       <div>
-        <div className={styles.board__search__title}>
+        <div>
           <h2>" {query} "</h2>{" "}
           <Button color="transparent" onClick={handleClickButtonAddToBookmarks}>
             <img src={markCircle} alt="add to bookmarks" />

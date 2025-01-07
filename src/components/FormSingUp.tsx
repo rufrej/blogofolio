@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useAppDispatch } from "../hooks/useStore.ts";
 import { FormField } from "./FormField.tsx";
-import styles from "../styles/form.module.scss";
 import { fetchSignUp } from "../redux/auth-slice.ts";
 
 export function FormSingUp() {
@@ -50,7 +49,7 @@ export function FormSingUp() {
   return (
     <div>
       <h1>Sing Up</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className="form">
         <div className="mb-3">
           <FormField
             ref={usernameInputRef}

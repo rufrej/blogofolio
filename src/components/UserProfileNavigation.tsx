@@ -3,7 +3,7 @@ import userIcon from "../assets/header-icons/userIcon.svg";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
 import { logOut } from "../redux/auth-slice";
-import { Button } from "./Button.tsx";
+import { Button } from "./UI/Button.tsx";
 
 export function UserProfileNavigation() {
   const navigate = useNavigate();

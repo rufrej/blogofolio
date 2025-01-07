@@ -1,8 +1,5 @@
-import styles from "../styles/cards.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import {setPreviewData, showPreviewModal} from '../redux/preview-post-slice';
-// import {setPreviewImage, showPreviewImage} from '../redux/preview-image-slice';
 
 export function CardSmall(props: any) {
   const dispatch = useDispatch();
@@ -18,27 +15,27 @@ export function CardSmall(props: any) {
   // };
 
   return (
-    <div className={styles.cardSmall}>
-      <div className={styles.cardContent}>
+    <div className="cardSmall">
+      <div className="cardContent">
         <div
-          className={styles.cardTextWrapper}
+          className="cardTextWrapper"
           // onClick={handleClickPostPreview}
         >
           <p>{props.item.date}</p>
           <h5>{props.item.title}</h5>
         </div>
         <img
-          className={styles.cardSmallPoster}
+          className="cardSmallPoster"
           src={props.item.image}
           alt="poster"
           // onClick={handleClickImagePreview}
         />
       </div>
-      <div className={styles.cardInteraction}>
+      <div className="cardInteraction">
         <div className="d-flex w-100">
           <Link
             to={`/posts/${props.item.id}`}
-            className=" btn btn-outline-secondary text-decoration-none ms-auto"
+            className="btn btn-outline-secondary text-decoration-none ms-auto"
           >
             Learn more
           </Link>

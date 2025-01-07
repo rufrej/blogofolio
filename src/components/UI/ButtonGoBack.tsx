@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button } from "./UI/Button";
 import { useNavigate } from "react-router-dom";
 import goback from "../assets/goback.svg";
 

@@ -1,4 +1,3 @@
-import styles from "../styles/posts.module.scss";
 import { useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
@@ -19,11 +18,12 @@ export function PostsList(props: any) {
     list: posts,
     isLoaded,
     error,
-    pageCount,
+    limit,
+    count,
     ordering,
   } = useAppSelector((state) => state.posts);
 
-  console.log(posts);
+  console.log(posts.length);
 
   useEffect(() => {
     if (!currentPage) return;
@@ -31,6 +31,7 @@ export function PostsList(props: any) {
   }, [dispatch, currentPage, ordering]);
 
   const renderPagination = () => {
+    if (count == null || count <= limit) return null;
     return (
       <nav>
         <ul className="pagination">{renderPaginationItems()}</ul>
@@ -39,8 +40,8 @@ export function PostsList(props: any) {
   };
 
   const renderPaginationItems = () => {
-    if (!currentPage || !pageCount) return null;
-    const shceme = buildSchemePagination(currentPage, pageCount);
+    if (!currentPage || !count) return null;
+    const shceme = buildSchemePagination(currentPage, count);
 
     return shceme.map((item, index) => {
       return (
@@ -104,12 +105,12 @@ export function PostsList(props: any) {
       <div>
         <div className="d-flex">{/* <h1>{props.title}</h1> */}</div>
         <Ordering page="all" />
-        <div className={styles.board}>
-          <div className={styles.firstColumn}>
+        <div className="board">
+          <div className="firstColumn">
             <div>{renderCardLarge()}</div>
-            <div className={styles.medium}>{renderCardMedium()}</div>
+            <div className="medium">{renderCardMedium()}</div>
           </div>
-          <div className={styles.small}>{renderCardSmall()}</div>
+          <div className="small">{renderCardSmall()}</div>
         </div>
         <div className="d-flex justify-content-center">
           {renderPagination()}

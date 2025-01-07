@@ -1,4 +1,3 @@
-import styles from "../styles/cards.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // import {setPreviewData, showPreviewModal} from '../redux/preview-post-slice';
@@ -18,23 +17,23 @@ export function CardMedium(props: any) {
   // };
 
   return (
-    <div className={styles.cardMedium}>
+    <div className="cardMedium">
       <img
-        className={styles.cardMediumPoster}
+        className="cardMediumPoster"
         src={props.item.image}
         alt="poster"
         // onClick={handleClickImagePreview}
       />
       <div>
         <div
-          className={styles.cardMediumTextWrapper}
+          className="cardMediumTextWrapper"
           // onClick={handleClickPostPreview}
         >
           <p>{props.item.date}</p>
           <h5>{props.item.title}</h5>
         </div>
       </div>
-      <div className={styles.cardInteraction}>
+      <div className="cardInteraction">
         <div className="d-flex w-100">
           <Link
             to={`/posts/${props.item.id}`}

@@ -5,8 +5,7 @@ import { UserProfileNavigation } from "./UserProfileNavigation.tsx";
 import cart from "../assets/header-icons/shopping-bag.svg";
 import heart from "../assets/header-icons/heart.svg";
 import { useTheme } from "../hooks/useTheme.ts";
-import { Button } from "./Button.tsx";
-import styles from "../styles/menu.module.scss";
+import { Button } from "./UI/Button.tsx";
 
 export function Menu() {
   const { theme, setTheme } = useTheme();
@@ -34,8 +33,8 @@ export function Menu() {
   };
 
   return (
-    <div className={styles.menu}>
-      <ul className={styles.menu__}>
+    <div className="menu">
+      <ul className="menu__list">
         <li></li>
         <li></li>
         <li></li>
