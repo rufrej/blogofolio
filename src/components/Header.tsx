@@ -4,7 +4,6 @@ import { SearchForm } from "./SearchForm.tsx";
 import { UserProfileNavigation } from "./UserProfileNavigation.tsx";
 import cart from "../assets/header-icons/shopping-bag.svg";
 import heart from "../assets/header-icons/heart.svg";
-import styles from "../styles/header.module.scss";
 import { useTheme } from "../hooks/useTheme.ts";
 import { Button } from "./Button.tsx";
 
@@ -15,9 +14,7 @@ export function Header() {
 
   function renderPurchaseСounter() {
     if (purchaseСounter == 0) return null;
-    return (
-      <span className={styles.header__cart__counter}>{purchaseСounter}</span>
-    );
+    return <span className="header__cart__counter">{purchaseСounter}</span>;
   }
 
   // function renderNavigation() {
@@ -43,13 +40,13 @@ export function Header() {
 
   return (
     <header>
-      <div className={styles.header__row}>
-        <NavLink className={styles.header__logo} to="/">
+      <div className="header__row">
+        <NavLink className="header__logo" to="/">
           <h1>blogofolio</h1>
         </NavLink>
         <SearchForm />
-        <div className={styles.header__nav}>
-          <div className={styles.header__userbar}>
+        <div className="header__nav">
+          <div className="header__userbar">
             <Button onClick={handleClickDarkThemeButton} color="dark">
               dark theme
             </Button>

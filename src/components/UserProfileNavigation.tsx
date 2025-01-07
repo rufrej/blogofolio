@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "../styles/header.module.scss";
 import userIcon from "../assets/header-icons/userIcon.svg";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
@@ -42,7 +41,7 @@ export function UserProfileNavigation() {
   return (
     <div>
       <div
-        className={styles.header__userbar__singin}
+        className="header__userbar__singin"
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
       >
@@ -52,7 +51,7 @@ export function UserProfileNavigation() {
         <div
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}
-          className={styles.header__userbar__menu}
+          className="header__userbar__menu"
         >
           {renderAuthButton()}
         </div>

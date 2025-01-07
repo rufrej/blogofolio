@@ -5,66 +5,66 @@
   background-color: white;
 }
 
-.button_red {
+.button__red {
   border: 1px solid rgba(210, 25, 25, 0.5);
   color: #d21919;
 }
 
-.button_red:hover {
+.button__red:hover {
   background-color: rgba(210, 25, 25, 0.05);
 }
 
-.button_orange {
+.button__orange {
   border: 1px solid rgba(210, 102, 25, 0.5);
   // color: #d27c19;
   color: #000;
 }
 
-.button_orange:hover {
+.button__orange:hover {
   background-color: rgba(233, 80, 8, 0.677);
 }
 
-.button_orange-full {
+.button__orange-full {
   border: 1px solid rgba(210, 102, 25, 0.5);
   background-color: rgba(233, 80, 8, 0.677);
 }
-.button_orange-full:hover {
+.button__orange-full:hover {
   background-color: rgba(233, 79, 8, 0.952);
 }
 
-.button_blue {
+.button__blue {
   border: 1px solid rgba(25, 118, 210, 0.5);
   color: #1976d2;
 }
 
-.button_blue:hover {
+.button__blue:hover {
   background-color: rgba(25, 118, 210, 0.05);
 }
-.button_green {
+.button__green {
   border: 1px solid rgba(40, 179, 38, 0.815);
   color: #19d257;
 }
 
-.button_green:hover {
+.button__green:hover {
   background-color: rgba(45, 228, 106, 0.742);
 }
 
-.button_dark {
+.button__dark {
   background-color: #000000;
   border: 1px solid rgba(172, 166, 166, 0.315);
   color: #fff;
 }
 
-.button_dark:hover {
+.button__dark:hover {
   background-color: rgba(0, 0, 0, 0.751);
 }
-.button_transparent {
+.button__transparent {
   background: transparent;
   border: none;
   color: #fff;
 }
 
-.button_group {
+.button__group {
   background-color: #000;
   display: flex;
   align-items: center;

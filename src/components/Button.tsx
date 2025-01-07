@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "../styles/button.module.scss";
+// import styles from "../styles/button.module.scss";
 
 interface ButtonProps extends React.ComponentPropsWithRef<"button"> {
   color:
@@ -14,8 +14,7 @@ interface ButtonProps extends React.ComponentPropsWithRef<"button"> {
 }
 
 export const Button: React.FC<ButtonProps> = ({ color, children, onClick }) => {
-  const className = `${styles.button} ${styles[`button_${color}`]}
-  }`;
+  const className = `button button__${color}`;
 
   return (
     <button className={className} onClick={onClick}>

@@ -4,12 +4,14 @@ import { Container } from "./Container";
 import { Header } from "./Header";
 import { Main } from "./Main";
 import { Footer } from "./Footer";
+import { Menu } from "./Menu";
 
 export function Layout() {
   return (
     <div>
       <Header />
       <Container>
+        <Menu />
         <Main>
           <Outlet />
         </Main>
