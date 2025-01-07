@@ -5,6 +5,7 @@ import { booksReduser } from "./books-slice";
 import { bookReduser } from "./book-slice";
 import { cartReduser } from "./cart-slice";
 import { favouritesReduser } from "./favourites-slice";
+import { postsReduser } from "./posts-slice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     book: bookReduser,
     cart: cartReduser,
     favourites: favouritesReduser,
+    posts: postsReduser,
   },
 });
 

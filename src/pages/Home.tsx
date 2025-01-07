@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../hooks/useStore";
-import { NewBooksList } from "../components/NewBooksList";
 import styles from "../styles/home.module.scss";
 
 export function Home() {
@@ -23,8 +22,7 @@ export function Home() {
   return (
     <div className={styles.homepage}>
       {renderAlert()}
-      <h1 className={styles.homepage__title}>new releases books</h1>
-      <NewBooksList />
+      <h1 className={styles.homepage__title}>Home page</h1>
     </div>
   );
 }

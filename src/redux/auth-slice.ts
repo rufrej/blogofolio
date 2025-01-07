@@ -162,7 +162,6 @@ export const authSlice = createSlice({
         fetchUserData.fulfilled,
         (state, action: PayloadAction<IUserData>) => {
           state.isLoaded = false;
-          console.warn(action.payload);
           state.currentUser = action.payload;
         }
       )

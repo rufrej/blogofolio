@@ -8,31 +8,23 @@ import styles from "../styles/header.module.scss";
 import { useTheme } from "../hooks/useTheme.ts";
 import { Button } from "./Button.tsx";
 
-export function Header() {
+export function Menu() {
   const { theme, setTheme } = useTheme();
   const token = useAppSelector((state) => state.auth.jwt);
-  const purchaseСounter = useAppSelector((state) => state.cart.list.length);
 
-  function renderPurchaseСounter() {
-    if (purchaseСounter == 0) return null;
+  function renderNavigation() {
+    if (!token) return null;
     return (
-      <span className={styles.header__cart__counter}>{purchaseСounter}</span>
+      <>
+        <NavLink className={styles.header__cart} to="/posts/all/1">
+          <img src={cart} alt="cart" />
+        </NavLink>
+        <NavLink className={styles.header__cart} to="/favourites">
+          <img src={heart} alt="favourites" />
+        </NavLink>
+      </>
     );
   }
-
-  // function renderNavigation() {
-  //   if (!token) return null;
-  //   return (
-  //     <>
-  //       <NavLink className={styles.header__cart} to="/posts/all/1">
-  //         <img src={cart} alt="cart" />
-  //       </NavLink>
-  //       <NavLink className={styles.header__cart} to="/favourites">
-  //         <img src={heart} alt="favourites" />
-  //       </NavLink>
-  //     </>
-  //   );
-  // }
 
   const handleClickLightThemeButton = () => {
     setTheme("light");
@@ -57,7 +49,7 @@ export function Header() {
               light theme
             </Button>
             <UserProfileNavigation />
-            {/* {renderNavigation()} */}
+            {renderNavigation()}
           </div>
         </div>
       </div>

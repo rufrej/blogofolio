@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .header {
   padding: 5px;
   width: 100%;
@@ -12,10 +14,12 @@
     text-decoration: none;
     font-size: 48px;
     font-weight: 700;
-    color: #000;
+    color: var(--text-color);
+
     h1 {
       margin-bottom: 0;
       margin-left: 20px;
+      color: var(--text-color);
     }
   }
 
@@ -37,9 +41,13 @@
     flex-direction: column;
     text-decoration: none;
     width: 40px;
-    color: #000;
+
     text-align: center;
     margin: 0 15px;
+
+    img {
+      color: var(--text-color);
+    }
 
     &__counter {
       color: #fff;
@@ -55,6 +63,10 @@
       background-color: red;
       border-radius: 50%;
     }
+  }
+
+  &__cart svg {
+    fill: aquamarine;
   }
 
   &__userbar {

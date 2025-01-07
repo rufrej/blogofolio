@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "../styles/header.module.scss";
 import userIcon from "../assets/header-icons/userIcon.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore.ts";
 import { logOut } from "../redux/auth-slice";
 import { Button } from "./Button.tsx";

@@ -3,8 +3,6 @@ import { useParams, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/useStore";
 import { fetchSearchBooks } from "../redux/search-slice";
 import { buildSchemePagination } from "../utils/schemePagination";
-import { IBookCard } from "../types/types";
-import { BookCard } from "./BookCard";
 import styles from "../styles/books.boards.module.scss";
 import { Button } from "./Button";
 import markCircle from "../assets/bookmark-circle-svgrepo-com.svg";
@@ -32,19 +30,20 @@ export function SearchResults() {
     );
   }, [dispatch, currentPage, query]);
 
-  function renderBooks() {
-    return list.map((book: IBookCard) => {
-      return (
-        <BookCard
-          key={book.isbn13}
-          image={book.image}
-          title={book.title}
-          price={book.price}
-          isbn={book.isbn13}
-        />
-      );
-    });
-  }
+  // function renderBooks() {
+  //   return list.map((book: IBookCard) => {
+  //     return (
+  //       <BookCard
+  //         key={book.isbn13}
+  //         image={book.image}
+  //         title={book.title}
+  //         price={book.price}
+  //         isbn={book.isbn13}
+  //       />
+  //     );
+  //   });
+  // }
+
   function renderPagination() {
     if (!searchResultsCount) return null;
     if (searchResultsCount <= 10) return null;
@@ -87,7 +86,7 @@ export function SearchResults() {
           <h2>Total : {searchResultsCount}</h2>
         </div>
 
-        <div className={styles.board}>{renderBooks()}</div>
+        {/* <div className={styles.board}>{renderBooks()}</div> */}
 
         <div className="d-flex justify-content-center">
           {renderPagination()}

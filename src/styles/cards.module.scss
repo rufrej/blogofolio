@@ -1,0 +1,120 @@
+p {
+  opacity: 50%;
+}
+.cardLarge {
+  margin: 20px;
+  max-width: 736px;
+  max-height: 452px;
+  border-bottom: 1px solid gainsboro;
+  // position: relative;
+}
+
+.cardContent {
+  display: flex;
+  gap: 2%;
+  margin-bottom: 20px;
+}
+
+.cardLargePoster {
+  width: 256px;
+  height: 244px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.cardLargeText {
+  text-overflow: clip;
+  white-space: wrap;
+  overflow: hidden;
+  max-height: 168px;
+}
+
+.cardTextWrapper {
+  max-width: 448px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  a {
+    z-index: 2;
+  }
+}
+
+.cardMediumTextWrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.cardMedium {
+  display: flex;
+  flex-direction: column;
+  max-width: 352px;
+  max-height: 452px;
+  border-bottom: 1px solid gainsboro;
+  margin: 12px;
+}
+
+.cardMediumPoster {
+  width: 352px;
+  height: 246px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.cardSmall {
+  max-width: 352px;
+  max-height: 206px;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid gainsboro;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // position: relative;
+}
+
+.cardSmallPoster {
+  max-width: 96px;
+  max-height: 96px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.cardInteraction {
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0 10px;
+  div {
+    display: flex;
+    gap: 5%;
+  }
+}
+
+.cardSearch {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  width: 1120px;
+
+  border-bottom: 1px solid gainsboro;
+  margin: 20px;
+  p {
+    text-overflow: clip;
+    white-space: wrap;
+    overflow: hidden;
+    max-height: 50px;
+  }
+}
+
+.cardSearchPoster {
+  max-width: 98px;
+  max-height: 96px;
+}
+
+.slideImage {
+  width: 520px;
+  height: 520px;
+}

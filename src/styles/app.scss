@@ -10,12 +10,14 @@
     font-family: Bebas Neue;
     font-size: 56px;
     font-weight: 700;
+    color: var(--text-color);
   }
   h2 {
     font-family: Bebas Neue;
     font-size: 40px;
     font-weight: 700;
-    color: #000;
+
+    color: var(--text-color);
   }
   h4 {
     font-family: Bebas Neue;
@@ -25,7 +27,23 @@
   margin: 0;
   box-sizing: border-box;
 
+  label {
+    color: var(--text-color);
+  }
+
   a {
     text-decoration: none;
+    color: var(--text-color);
   }
+
+  .svg {
+    path {
+      fill: var(--text-color);
+    }
+  }
+}
+
+#root {
+  background-color: var(--background-color);
+  transition: background-color 200ms linear;
 }
